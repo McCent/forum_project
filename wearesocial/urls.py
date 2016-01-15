@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from accounts.views import register, login, logout, profile, subscriptions_webhook
-from threads.views import threads, new_thread, thread, new_post, edit_post, delete_post, forum
+from threads.views import threads, new_thread, thread, new_post, edit_post, delete_post, forum, thread_vote
 import settings
 from django.conf.urls.static import static
 
@@ -39,4 +39,5 @@ urlpatterns = [
     url(r'^post/new/(?P<thread_id>\d+)/$', new_post, name='new_post'),
     url(r'^post/edit/(?P<thread_id>\d+)/(?P<post_id>\d+)/$', edit_post, name='edit_post'),
     url(r'^post/delete_post/(?P<post_id>\d+)/$', delete_post, name='delete_post'),
+    url(r'^thread/vote/(?P<thread_id>\d+)/(?P<subject_id>\d+)/$', thread_vote, name='cast_vote'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

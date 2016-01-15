@@ -25,7 +25,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '6z&wgplz=r&dntnhw4_+66+nsm7!#xh^1n7ks!3p!z5!fusfj#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -74,8 +74,11 @@ ROOT_URLCONF = 'wearesocial.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
-        ,
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates'),
+            os.path.join(BASE_DIR, 'forum_app', 'templates'),
+            os.path.join(BASE_DIR, 'threads', 'templates')
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -83,6 +86,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.core.context_processors_media',
             ],
         },
     },
@@ -150,3 +154,10 @@ STRIPE_SECRET = os.getenv('STRIPE_SECRET','sk_test_va4P0hDQHMLQsqSEQYhlEaTY')
 
 # tinymce settings
 TINYMCE_JS_ROOT = os.path.join(BASE_DIR, 'static', 'js', 'tinymce', 'tinymce.min.js')
+
+TEMPLATE_DEBUG = False
+
+try:
+    from local_settings import *
+except:
+    pass

@@ -1,4 +1,4 @@
 *.pyc
-*.wp*
+.idea/*
 *.sqlite3
 local_setting.py
